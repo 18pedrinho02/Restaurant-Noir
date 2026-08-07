@@ -2,18 +2,20 @@ import { useRef, useState } from 'react'
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from "@gsap/react";
+import DishCard from './DishCard';
+import { FaArrowRight } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const SignatureDishes =({signatureRef})=>{
 
     const dishesContainer=useRef(null);
-    const disheText=useRef(null);
-    const disheImage=useRef(null);
-    const dishe=useRef(null);
+    const exploreFullMenuRef=useRef(null);
+    const exploreFullMenuLinkRef=useRef(null);
 
 
     useGSAP(()=>{
+
 
         const tl = gsap.timeline({
             scrollTrigger:{
@@ -37,7 +39,26 @@ const SignatureDishes =({signatureRef})=>{
             duration:0.6
         },'<0.8')
 
+        gsap.set(exploreFullMenuLinkRef.current, {
+            yPercent: 80,
+            opacity: 0
+        })
+
+        const tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: exploreFullMenuRef.current,
+                start: 'top 90%',
+                toggleActions: 'play none none reverse'
+            }
+        })
+
+        tl2.to(exploreFullMenuLinkRef.current, {
+            yPercent: 0,
+            opacity: 1,
+            duration: 1
+        })
     })
+
 
 
 
@@ -47,21 +68,38 @@ const SignatureDishes =({signatureRef})=>{
                 <h1 id='signatureTitle' className="text-5xl font-heading text-text">SIGNATURE DISHES</h1>
                 <p id='signatureSubtitle' className="text-sm text-text-secondary font-body mt-4">A curated selection of our most celebrated creations</p>
             </div>
-            <div ref={dishesContainer} className='mt-64 w-full flex flex-col space-y-14'>
-                <div ref={dishe} className='w-full h-screen flex py-24 px-16'>
-                    <div ref={disheText} className='w-[40%] h-full text-text flex flex-col text-start pl-32 font-body pt-20 '>
-                        <h2 className=' text-sm text-text-secondary'>01</h2>
-                        <h1 className=' font-heading text-3xl tracking-wide text-accent mt-4 mb-6'>Dry Aged Ribeye</h1>
-                        <hr className='text-text-secondary w-[30%] mb-12'/>
-                        <h3 className='max-w-[60%] text-sm mb-28 leading-6'>Dry-aged ribeye steak, aged 30 days for maximum
-                            richness, deep savory flavor, and tenderness.
-                            Grilled over open embers to highlight its marbling.</h3>
-                        <h2 className='text-sm text-accent'>42€</h2>
-                    </div>
-                    <div ref={disheImage} className='w-[60%] h-full overflow-hidden'>
-                        <img src="/photos/dishe1.jpg" alt="" className='w-full h-full object-cover border-1 border-surface'/>
-                    </div>
-                </div>
+            <div ref={dishesContainer} className='mt-64 w-full flex flex-col space-y-0'>
+                <DishCard
+                    number="01"
+                    name="Dry Aged Ribeye"
+                    description="Dry-aged ribeye steak, aged 30 days for maximum richness, deep savory flavor, and tenderness."
+                    price="42"
+                    image="/photos/dish1.jpg"
+                    imageSide="right"
+                />
+
+                <DishCard
+                    number="02"
+                    name="Truffle Risotto"
+                    description="Creamy Arborio rice finished with black truffle, aged Parmesan and a touch of white wine."
+                    price="28"
+                    image="/photos/dish2.jpg"
+                    imageSide="left"
+                />
+
+                <DishCard
+                    number="03"
+                    name="Seared Scallops"
+                    description="Perfectly seared scallops served with cauliflower purée, citrus and a delicate herb oil."
+                    price="32"
+                    image="/photos/dish3.png"
+                    imageSide="right"
+                />
+            </div>
+
+            <div ref={exploreFullMenuRef} className='w-full flex flex-col items-center gap-5 text-center mb-32'>
+                <hr className='w-[90%] text-text-secondary'></hr>
+                <a ref={exploreFullMenuLinkRef} href="#menu" className='font-body group text-sm inline-flex items-center gap-2 text-text-secondary transition-all ease-in duration-300 uppercase hover:text-accent tracking-wide' >Explore full menu <FaArrowRight className='transition-all ease-in duration-300 group-hover:translate-x-3'></FaArrowRight> </a>
             </div>
         </section>
     )
