@@ -39,24 +39,20 @@ const SignatureDishes =({signatureRef})=>{
             duration:0.6
         },'<0.8')
 
-        gsap.set(exploreFullMenuLinkRef.current, {
-            yPercent: 80,
-            opacity: 0
-        })
-
-        const tl2 = gsap.timeline({
-            scrollTrigger: {
-                trigger: exploreFullMenuRef.current,
-                start: 'top 90%',
-                toggleActions: 'play none none reverse'
+        const tl2=gsap.timeline({
+            scrollTrigger:{
+                trigger:exploreFullMenuRef.current,
+                start:'top 70%',
+                toggleActions:'play none none reverse'
             }
         })
 
-        tl2.to(exploreFullMenuLinkRef.current, {
-            yPercent: 0,
-            opacity: 1,
-            duration: 1
+        tl2.to(exploreFullMenuRef.current,{
+            opacity:0,
+            x:-40,
+            duration:1
         })
+
     })
 
 
@@ -97,7 +93,7 @@ const SignatureDishes =({signatureRef})=>{
                 />
             </div>
 
-            <div ref={exploreFullMenuRef} className='w-full flex flex-col items-center gap-5 text-center mb-32'>
+            <div ref={exploreFullMenuRef} className='w-full flex flex-col items-center gap-12 text-center mb-32'>
                 <hr className='w-[90%] text-text-secondary'></hr>
                 <a ref={exploreFullMenuLinkRef} href="#menu" className='font-body group text-sm inline-flex items-center gap-2 text-text-secondary transition-all ease-in duration-300 uppercase hover:text-accent tracking-wide' >Explore full menu <FaArrowRight className='transition-all ease-in duration-300 group-hover:translate-x-3'></FaArrowRight> </a>
             </div>

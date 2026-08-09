@@ -11,7 +11,7 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
   };
 
     return(
-        <div className="w-full min-h-[80px] fixed top-0 left-0 z-50 bg-transparent">
+        <div className="w-full min-h-[80px] fixed top-0 left-0 z-50 bg-black/20 backdrop-blur-sm">
             <div className="absolute top-8 left-16 z-30">
                 <h1 className=" font-heading text-lg text-text">
                 NOIR

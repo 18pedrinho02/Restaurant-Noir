@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import Hero from './components/Hero';
 import SignatureDishes from './components/SignatureDishes'
 import Navbar from './components/Navbar';
+import OurStory from './components/OurStory';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,6 +18,9 @@ function App() {
   const heroSubtitleRef = useRef(null);
   const heroButtonsRef = useRef(null);
   const heroOverlayRef = useRef(null);
+
+  // Our Story
+  const storyRef = useRef(null);
 
   useGSAP(()=>{
     const tl = gsap.timeline({
@@ -69,6 +73,7 @@ function App() {
         heroButtonsRef={heroButtonsRef}
         heroOverlayRef={heroOverlayRef}/>
       <SignatureDishes signatureRef={signatureRef} />
+      <OurStory storyRef={storyRef}/>
     </>
   )
 }
