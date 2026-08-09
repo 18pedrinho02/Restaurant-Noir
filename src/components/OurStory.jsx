@@ -67,7 +67,7 @@ const OurStory = ({ storyRef }) => {
         const exitTl=gsap.timeline({
             scrollTrigger:{
                 trigger:ourStoryContentRef.current,
-                start:'bottom 70%',
+                start:'bottom 50%',
                 toggleActions:'play none none reverse'
             }
         })

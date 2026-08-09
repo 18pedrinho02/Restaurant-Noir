@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 import SignatureDishes from './components/SignatureDishes'
 import Navbar from './components/Navbar';
 import OurStory from './components/OurStory';
+import Experience from './components/Experience';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +22,9 @@ function App() {
 
   // Our Story
   const storyRef = useRef(null);
+
+  // Experience
+  const experienceRef=useRef(null);
 
   useGSAP(()=>{
     const tl = gsap.timeline({
@@ -74,6 +78,7 @@ function App() {
         heroOverlayRef={heroOverlayRef}/>
       <SignatureDishes signatureRef={signatureRef} />
       <OurStory storyRef={storyRef}/>
+      <Experience experienceRef={experienceRef} />
     </>
   )
 }
