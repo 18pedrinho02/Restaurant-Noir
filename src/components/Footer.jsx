@@ -14,9 +14,7 @@ const Footer = ({ footerRef }) => {
 
     useGSAP(() => {
 
-        // =========================
         // LOGO
-        // =========================
 
         gsap.from(footerLogoRef.current, {
             opacity: 0,
@@ -32,9 +30,7 @@ const Footer = ({ footerRef }) => {
         });
 
 
-        // =========================
         // CONTENT
-        // =========================
 
         const footerItems = footerContentRef.current.querySelectorAll(
             '.footer-item'
@@ -55,24 +51,6 @@ const Footer = ({ footerRef }) => {
             scrollTrigger: {
                 trigger: footerContentRef.current,
                 start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            }
-        });
-
-
-        // =========================
-        // BOTTOM
-        // =========================
-
-        gsap.from(footerBottomRef.current, {
-            opacity: 0,
-            y: 20,
-            duration: 0.8,
-            ease: 'power3.out',
-
-            scrollTrigger: {
-                trigger: footerBottomRef.current,
-                start: 'top 90%',
                 toggleActions: 'play none none reverse'
             }
         });

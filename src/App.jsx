@@ -11,8 +11,14 @@ import MenuPreview from './components/MenuPreview';
 import Testimonials from './components/Testimonials';
 import Reservation from './components/Reservations';
 import Footer from './components/Footer';
+import Takeaway from './components/Takeaway';
+import { CartProvider } from './context/CartContext';
+import { createRoot } from 'react-dom/client';
+import { StrictMode } from 'react';
+
 
 gsap.registerPlugin(ScrollTrigger);
+
 
 function App() {
 
@@ -111,6 +117,8 @@ function App() {
       <Testimonials testimonialsRef={testimonialsRef} />
       <Reservation reservationRef={reservationRef} />
       <Footer footerRef={footerRef}/>
+      <Takeaway/>
+      
     </>
   )
 }
