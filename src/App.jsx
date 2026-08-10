@@ -8,6 +8,9 @@ import Navbar from './components/Navbar';
 import OurStory from './components/OurStory';
 import Experience from './components/Experience';
 import MenuPreview from './components/MenuPreview';
+import Testimonials from './components/Testimonials';
+import Reservation from './components/Reservations';
+import Footer from './components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,6 +32,15 @@ function App() {
 
   // Menu Preview
   const menuPreviewRef=useRef(null);
+
+  // Testimonials
+  const testimonialsRef=useRef(null);
+
+  // Reservation
+  const reservationRef=useRef(null);
+
+  // Footer
+  const footerRef=useRef(null);
 
   useGSAP(()=>{
     const tl = gsap.timeline({
@@ -96,6 +108,9 @@ function App() {
       <OurStory storyRef={storyRef}/>
       <Experience experienceRef={experienceRef} />
       <MenuPreview menuPreviewRef={menuPreviewRef} />
+      <Testimonials testimonialsRef={testimonialsRef} />
+      <Reservation reservationRef={reservationRef} />
+      <Footer footerRef={footerRef}/>
     </>
   )
 }

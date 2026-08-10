@@ -91,7 +91,10 @@ const MenuPreview = ({ menuPreviewRef }) => {
         }, '<0.5')
 
 
-        const categories = gsap.utils.toArray('.menu-category');
+        const categories = gsap.utils.toArray(
+            '.menu-category',
+            previewCategoriesRef.current
+        );
 
         categories.forEach((category) => {
 
@@ -99,8 +102,6 @@ const MenuPreview = ({ menuPreviewRef }) => {
             const categoryNumber = category.querySelector('.menu-category-number');
             const dishes = category.querySelectorAll('.menu-dish');
 
-
-            // Estado inicial
             gsap.set(categoryTitle, {
                 opacity: 0,
                 y: 30
@@ -116,8 +117,6 @@ const MenuPreview = ({ menuPreviewRef }) => {
                 x: -30
             });
 
-
-            // Timeline desta categoria
             const categoryTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: category,
@@ -125,7 +124,6 @@ const MenuPreview = ({ menuPreviewRef }) => {
                     toggleActions: 'play none none reverse'
                 }
             });
-
 
             categoryTl
                 .to(categoryTitle, {
