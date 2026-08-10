@@ -2,7 +2,7 @@ const Hero = ({heroRef, heroVideoRef, heroTitleRef, heroSubtitleRef, heroButtons
 
 
   return (
-    <section ref={heroRef} className="relative min-h-screen w-full overflow-hidden bg-background">
+    <section ref={heroRef} id="home" className="relative min-h-screen w-full overflow-hidden bg-background">
 
     <div className="z-30 flex h-1/3 absolute text-center text-text flex-col top-[47%] left-1/2 -translate-x-1/2 -translate-y-1/2">
         <h1 ref={heroTitleRef} className="font-heading text-accent text-9xl" style={{

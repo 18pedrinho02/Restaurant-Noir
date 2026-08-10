@@ -7,6 +7,7 @@ import SignatureDishes from './components/SignatureDishes'
 import Navbar from './components/Navbar';
 import OurStory from './components/OurStory';
 import Experience from './components/Experience';
+import MenuPreview from './components/MenuPreview';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,6 +26,9 @@ function App() {
 
   // Experience
   const experienceRef=useRef(null);
+
+  // Menu Preview
+  const menuPreviewRef=useRef(null);
 
   useGSAP(()=>{
     const tl = gsap.timeline({
@@ -64,6 +68,18 @@ function App() {
     }, '<')
 
 
+    const experienceTl=gsap.timeline({
+      scrollTrigger:{
+        trigger:experienceRef.current,
+        start:'bottom bottom',
+        end:'+=100%',
+        pin:true,
+        scrub:true,
+        pinSpacing:false
+    }
+    })
+
+
   }, {dependencies:[]})
 
 
@@ -79,6 +95,7 @@ function App() {
       <SignatureDishes signatureRef={signatureRef} />
       <OurStory storyRef={storyRef}/>
       <Experience experienceRef={experienceRef} />
+      <MenuPreview menuPreviewRef={menuPreviewRef} />
     </>
   )
 }
