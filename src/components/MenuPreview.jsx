@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from "@gsap/react";
+import { Link } from "react-router-dom";
 
 const menuCategories = [
     {
@@ -264,7 +265,7 @@ const MenuPreview = ({ menuPreviewRef }) => {
 
 
                 {/* BUTTON */}
-                <div ref={previewButtonRef} className="flex justify-center pt-8">
+                <div ref={previewButtonRef} className="flex justify-center gap-5 pt-8">
 
                     <a
                         href="#menu"
@@ -278,6 +279,19 @@ const MenuPreview = ({ menuPreviewRef }) => {
                             →
                         </span>
                     </a>
+                    
+                    <Link
+                        to="/takeaway"
+                        className="group inline-flex items-center gap-4 border border-[#181818]/40 px-8 py-4 font-body text-xs tracking-[0.2em] uppercase transition-all duration-500 hover:bg-[#181818] hover:text-[#EDE9E1]"
+                    >
+                        <span>
+                            Takeaway orders
+                        </span>
+
+                        <span className="transition-transform duration-500 group-hover:translate-x-2">
+                            →
+                        </span>
+                    </Link>
 
                 </div>
 
