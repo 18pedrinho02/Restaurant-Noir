@@ -5,8 +5,6 @@ import { useGSAP } from '@gsap/react';
 
 const CartDrawer = ({ isOpen, onClose }) => {
 
-    const drawerRef = useRef(null);
-
     const {
         cartItems,
         addToCart,
@@ -14,20 +12,51 @@ const CartDrawer = ({ isOpen, onClose }) => {
         removeFromCart
     } = useCart();
 
-
-    // =========================
-    // CART TOTAL
-    // =========================
-
     const cartTotal = cartItems.reduce(
         (total, item) => total + item.price * item.quantity,
         0
     );
 
 
-    // =========================
-    // DRAWER ANIMATION
-    // =========================
+    const handleCheckout = async () => {
+
+        try {
+
+            const response = await fetch(
+                "http://localhost:4242/api/create-checkout-session",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+
+                    body: JSON.stringify({
+                        items: cartItems,
+                    }),
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "Checkout failed");
+            }
+
+            window.location.href = data.url;
+
+        } catch (error) {
+
+            console.error("Checkout error:", error);
+
+        }
+
+    };
+
+
+
+    const drawerRef = useRef(null);
+
 
     useGSAP(() => {
 
@@ -255,6 +284,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
                         <button
                             type="button"
+                            onClick={handleCheckout}
                             disabled={cartItems.length === 0}
                             className="w-full bg-[#181818] px-6 py-5 font-body text-xs tracking-[0.2em] text-[#EDE9E1] uppercase transition-all duration-500 hover:bg-[#A88B5A] disabled:cursor-not-allowed disabled:opacity-30"
                         >
