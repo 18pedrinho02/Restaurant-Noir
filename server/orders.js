@@ -86,13 +86,57 @@ const createOrder = (order) => {
 
 const getOrders = () => {
 
-    return db
+    const orders = db
         .prepare(`
             SELECT *
             FROM orders
             ORDER BY created_at DESC
         `)
         .all();
+
+
+    return orders.map((order) => {
+
+        const items = db
+            .prepare(`
+                SELECT
+                    product_id,
+                    product_name,
+                    quantity,
+                    price
+
+                FROM order_items
+
+                WHERE order_id = ?
+            `)
+            .all(order.id);
+
+
+        return {
+
+            id: order.id,
+
+            stripeSessionId:
+                order.stripe_session_id,
+
+            customer: {
+                email: order.customer_email
+            },
+
+            items: items.map((item) => ({
+                id: item.product_id,
+                name: item.product_name,
+                quantity: item.quantity,
+                price: item.price
+            })),
+
+            total: order.total,
+
+            status: order.status,
+
+            createdAt: order.created_at
+        };
+    });
 };
 
 
@@ -154,9 +198,51 @@ const getOrder = (orderId) => {
     };
 };
 
+const updateOrderStatus = (orderId, status) => {
+
+    const validStatuses = [
+        "paid",
+        "preparing",
+        "ready",
+        "completed"
+    ];
+
+
+    if (!validStatuses.includes(status)) {
+
+        throw new Error(
+            "Invalid order status"
+        );
+
+    }
+
+
+    const result = db
+        .prepare(`
+            UPDATE orders
+            SET status = ?
+            WHERE id = ?
+        `)
+        .run(status, orderId);
+
+
+    if (result.changes === 0) {
+
+        return null;
+
+    }
+
+
+    // Devolve o pedido completo,
+    // incluindo customer e items
+
+    return getOrder(orderId);
+};
+
 
 export {
     createOrder,
     getOrders,
-    getOrder
+    getOrder,
+    updateOrderStatus
 };

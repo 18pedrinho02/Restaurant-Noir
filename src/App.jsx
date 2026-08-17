@@ -14,6 +14,7 @@ import Reservation from './components/Reservations';
 import Footer from './components/Footer';
 import Takeaway from './components/Takeaway';
 import OrderSuccess from './components/OrderSuccess';
+import Admin from "./components/Admin";
 
 import { CartProvider } from './context/CartContext';
 
@@ -235,6 +236,12 @@ function Root() {
                         path="/success"
                         element={<OrderSuccess />}
                     />
+
+                    <Route
+                        path="/admin"
+                        element={<Admin />}
+                    />
+                    
                 </Routes>
 
             </CartProvider>
