@@ -2,44 +2,176 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import Stripe from "stripe";
+import products from "./products.js";
+import { createOrder } from "./orders.js";
+import db from "./database.js";
 
 dotenv.config();
 
 const app = express();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+app.use(cors());
 
-const products = {
-    burrata: {
-        name: "Burrata",
-        price: 1200
-    },
+app.post(
+    "/api/webhook",
+    express.raw({ type: "application/json" }),
+    (req, res) => {
 
-    "beef-tartare": {
-        name: "Beef Tartare",
-        price: 1600
-    },
+        const signature = req.headers["stripe-signature"];
 
-    "dry-aged-ribeye": {
-        name: "Dry Aged Ribeye",
-        price: 3800
-    },
+        let event;
 
-    "truffle-risotto": {
-        name: "Truffle Risotto",
-        price: 2800
-    },
+        try {
 
-    "chocolate-sphere": {
-        name: "Chocolate Sphere",
-        price: 1100
-    },
+            event = stripe.webhooks.constructEvent(
+                req.body,
+                signature,
+                process.env.STRIPE_WEBHOOK_SECRET
+            );
 
-    "lemon-tart": {
-        name: "Lemon Tart",
-        price: 1000
+        } catch (error) {
+
+            console.error(
+                "Webhook signature verification failed:",
+                error.message
+            );
+
+            return res.status(400).send(
+                `Webhook Error: ${error.message}`
+            );
+        }
+
+        console.log("Stripe event received:", event.type);
+
+        if (event.type === "checkout.session.completed") {
+
+            const session = event.data.object;
+
+
+            // GET ITEMS FROM METADATA
+            if (!session.metadata?.items) {
+
+                console.error(
+                    "No order items found in Stripe metadata."
+                );
+
+                return res.status(400).json({
+                    error: "Order items missing"
+                });
+            }
+
+            const itemsFromMetadata = JSON.parse(
+                session.metadata.items
+            );
+
+
+            // BUILD ORDER ITEMS
+
+            const orderItems = itemsFromMetadata.map((item) => {
+
+                const product = products[item.id];
+
+                if (!product) {
+
+                    throw new Error(
+                        `Product not found: ${item.id}`
+                    );
+                }
+
+                return {
+                    id: item.id,
+                    name: product.name,
+                    quantity: item.quantity,
+                    price: product.price / 100
+                };
+            });
+
+
+            // CALCULATE TOTAL
+
+            const total = orderItems.reduce(
+                (sum, item) => {
+                    return sum + item.price * item.quantity;
+                },
+                0
+            );
+
+
+            // CREATE ORDER ID
+
+            const orderId = `NOIR-${Date.now()}`;
+
+
+            // CREATE ORDER
+
+            const order = {
+
+                id: orderId,
+
+                stripeSessionId: session.id,
+
+                customer: {
+                    email: session.customer_details?.email || null
+                },
+
+                items: orderItems,
+
+                total: total,
+
+                status: "paid",
+
+                createdAt: new Date().toISOString()
+            };
+
+
+            // SAVE ORDER
+
+            createOrder(order);
+
+
+            // LOG ORDER
+
+            console.log("");
+            console.log("==============================");
+            console.log("NEW ORDER");
+            console.log("==============================");
+
+            console.log(
+                "Order ID:",
+                order.id
+            );
+
+            console.log(
+                "Customer:",
+                order.customer.email
+            );
+
+            console.log(
+                "Items:",
+                order.items
+            );
+
+            console.log(
+                "Total:",
+                `€${order.total.toFixed(2)}`
+            );
+
+            console.log(
+                "Status:",
+                order.status
+            );
+
+            console.log("==============================");
+            console.log("");
+        }
+
+        res.json({ received: true });
     }
-};
+);
+
+app.use(express.json());
+
 
 console.log(
     process.env.STRIPE_SECRET_KEY
@@ -47,8 +179,6 @@ console.log(
         : "Stripe key missing"
 );
 
-app.use(cors());
-app.use(express.json());
 
 app.post("/api/create-checkout-session", async (req, res) => {
 
@@ -68,6 +198,15 @@ app.post("/api/create-checkout-session", async (req, res) => {
 
             if (!product) {
                 throw new Error(`Product not found: ${item.id}`);
+            }
+
+            if (
+                !Number.isInteger(item.quantity) ||
+                item.quantity <= 0
+            ) {
+                throw new Error(
+                    `Invalid quantity for product: ${item.id}`
+                );
             }
 
             return {
@@ -90,6 +229,15 @@ app.post("/api/create-checkout-session", async (req, res) => {
             line_items: lineItems,
 
             mode: "payment",
+
+            metadata: {
+                items: JSON.stringify(
+                    items.map((item) => ({
+                        id: item.id,
+                        quantity: item.quantity,
+                    }))
+                ),
+            },
 
             success_url: "http://localhost:5173/success",
 

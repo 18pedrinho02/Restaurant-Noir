@@ -13,6 +13,7 @@ import Testimonials from './components/Testimonials';
 import Reservation from './components/Reservations';
 import Footer from './components/Footer';
 import Takeaway from './components/Takeaway';
+import OrderSuccess from './components/OrderSuccess';
 
 import { CartProvider } from './context/CartContext';
 
@@ -230,6 +231,10 @@ function Root() {
                         element={<Takeaway />}
                     />
 
+                    <Route
+                        path="/success"
+                        element={<OrderSuccess />}
+                    />
                 </Routes>
 
             </CartProvider>
