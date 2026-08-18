@@ -67,6 +67,14 @@ const Admin = () => {
 
         fetchOrders();
 
+        const interval = setInterval(() => {
+            fetchOrders();
+        }, 5000);
+
+        return () => {
+            clearInterval(interval);
+        };
+
     }, []);
 
 
@@ -273,7 +281,7 @@ const Admin = () => {
                                 className="w-full text-left border border-white/10 px-8 py-7 transition-all duration-300 hover:bg-white/[0.03] hover:border-white/20"
                             >
 
-                                <div className="grid grid-cols-4 gap-8 items-center">
+                                <div className="grid grid-cols-5 gap-8 items-center">
 
 
                                     {/* ORDER */}
@@ -316,6 +324,34 @@ const Admin = () => {
 
                                         <p className="font-heading text-2xl mt-1">
                                             €{order.total.toFixed(2)}
+                                        </p>
+
+                                    </div>
+                                    
+                                    {/* TIME */}
+
+                                    <div>
+
+                                        <span className="font-body text-[10px] tracking-[0.2em] text-[#9A9A9A] uppercase">
+                                            Time
+                                        </span>
+
+                                        <p className="font-heading text-xl mt-1">
+                                            {new Date(order.createdAt).toLocaleDateString(
+                                                "pt-PT"
+                                            )}
+
+                                            <span className="text-[#9A9A9A] mx-2">
+                                                ·
+                                            </span>
+
+                                            {new Date(order.createdAt).toLocaleTimeString(
+                                                "pt-PT",
+                                                {
+                                                    hour: "2-digit",
+                                                    minute: "2-digit"
+                                                }
+                                            )}
                                         </p>
 
                                     </div>

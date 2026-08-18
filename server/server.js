@@ -276,6 +276,9 @@ app.post(
     }
 );
 
+app.use(express.json());
+
+
 // ========================================
 // CREATE CHECKOUT SESSION
 // ========================================
@@ -417,8 +420,6 @@ app.post(
 
     }
 );
-
-app.use(express.json());
 
 
 

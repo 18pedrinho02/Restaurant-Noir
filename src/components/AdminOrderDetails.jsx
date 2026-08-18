@@ -198,7 +198,7 @@ const AdminOrderDetails = ({
                     </span>
 
                     <p className="font-body text-sm mt-2">
-                        {order.customer_email}
+                        {order.customer.email}
                     </p>
 
                 </div>

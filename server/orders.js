@@ -232,10 +232,6 @@ const updateOrderStatus = (orderId, status) => {
 
     }
 
-
-    // Devolve o pedido completo,
-    // incluindo customer e items
-
     return getOrder(orderId);
 };
 
