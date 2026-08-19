@@ -1,23 +1,35 @@
 const navbarItems = [
     {
         name: "Home",
-        target: "home"
+        type: "route",
+        path: "/"
     },
     {
         name: "Menu",
-        target: "menu-preview"
+        type: "route",
+        path: "/menu"
+    },
+    {
+        name: "Takeaway",
+        type: "route",
+        path: "/takeaway"
     },
     {
         name: "About",
+        type: "section",
         target: "story"
     },
     {
         name: "Contact",
+        type: "section",
         target: "reservation"
     }
 ];
 
-const FullscreenMenu = ({ isMenuOpen, onNavigate }) => {
+const FullscreenMenu = ({
+    isMenuOpen,
+    onNavigate
+}) => {
 
     return (
         <div
@@ -46,7 +58,7 @@ const FullscreenMenu = ({ isMenuOpen, onNavigate }) => {
                         <button
                             key={item.name}
                             type="button"
-                            onClick={() => onNavigate(item.target)}
+                            onClick={() => onNavigate(item)}
                             className="
                                 font-heading
                                 text-2xl

@@ -10,36 +10,86 @@ const Navbar = () => {
 
     const navigate = useNavigate();
 
+
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev);
     };
 
 
-    const scrollToSection = (id) => {
+    const handleNavigation = (item) => {
 
-        const element = document.getElementById(id);
-
-        if (!element) return;
-
+        // Fecha o menu
         setIsMenuOpen(false);
 
-        element.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-    };
+
+        // =========================
+        // ROUTES
+        // =========================
+
+        if (item.type === "route") {
+
+            navigate(item.path);
+
+            // Se for Home, garantir que fica no topo
+            if (item.path === "/") {
+
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+                }, 50);
+
+            }
+
+            return;
+        }
 
 
-    const goHome = () => {
+        // =========================
+        // SECTIONS
+        // =========================
 
-        setIsMenuOpen(false);
+        if (item.type === "section") {
 
-        navigate("/");
+            // Se já estamos na homepage
+            if (window.location.pathname === "/") {
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+                const element = document.getElementById(
+                    item.target
+                );
+
+                if (!element) return;
+
+                element.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+                return;
+            }
+
+
+            // Se estamos noutra página,
+            // primeiro voltamos para a homepage
+            navigate("/");
+
+            setTimeout(() => {
+
+                const element = document.getElementById(
+                    item.target
+                );
+
+                if (!element) return;
+
+                element.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }, 100);
+
+        }
     };
 
 
@@ -56,7 +106,12 @@ const Navbar = () => {
                 {/* LOGO */}
 
                 <button
-                    onClick={goHome}
+                    onClick={() =>
+                        handleNavigation({
+                            type: "route",
+                            path: "/"
+                        })
+                    }
                     className={`
                         font-heading
                         text-lg
@@ -83,7 +138,7 @@ const Navbar = () => {
 
             <FullscreenMenu
                 isMenuOpen={isMenuOpen}
-                onNavigate={scrollToSection}
+                onNavigate={handleNavigation}
             />
         </>
     );
