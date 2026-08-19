@@ -194,6 +194,7 @@ const Reservation = ({ reservationRef }) => {
 
     return (
         <section
+        id='reservation'
             ref={reservationRef}
             className="w-full min-h-screen bg-background text-text overflow-hidden relative px-16 py-32 flex items-center"
         >
@@ -335,17 +336,6 @@ const Reservation = ({ reservationRef }) => {
                             </a>
 
                         </div>
-
-
-                        {/* NOTE */}
-
-                        <p
-                            ref={reservationNoteRef}
-                            className="font-body text-xs text-text-secondary leading-6 mt-6 max-w-sm"
-                        >
-                            For parties larger than eight guests, please contact
-                            our team directly.
-                        </p>
 
                     </div>
 

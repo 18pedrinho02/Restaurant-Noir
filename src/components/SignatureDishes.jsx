@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from "@gsap/react";
 import DishCard from './DishCard';
 import { FaArrowRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -95,7 +96,7 @@ const SignatureDishes =({signatureRef})=>{
 
             <div ref={exploreFullMenuRef} className='w-full flex flex-col items-center gap-12 text-center mb-32'>
                 <hr className='w-[90%] text-text-secondary'></hr>
-                <a ref={exploreFullMenuLinkRef} href="#menu" className='font-body group text-sm inline-flex items-center gap-2 text-text-secondary transition-all ease-in duration-300 uppercase hover:text-accent tracking-wide' >Explore full menu <FaArrowRight className='transition-all ease-in duration-300 group-hover:translate-x-3'></FaArrowRight> </a>
+                <Link ref={exploreFullMenuLinkRef} to="/menu" className='font-body group text-sm inline-flex items-center gap-2 text-text-secondary transition-all ease-in duration-300 uppercase hover:text-accent tracking-wide' >Explore full menu <FaArrowRight className='transition-all ease-in duration-300 group-hover:translate-x-3'></FaArrowRight> </Link>
             </div>
         </section>
     )

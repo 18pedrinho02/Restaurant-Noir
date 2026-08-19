@@ -2,6 +2,10 @@
 @import "tailwindcss";
 
 
+html {
+    scroll-behavior: smooth;
+}
+
 @theme {
 
   --font-heading: "Cormorant Garamond", serif;

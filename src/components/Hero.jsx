@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Hero = ({heroRef, heroVideoRef, heroTitleRef, heroSubtitleRef, heroButtonsRef, heroOverlayRef}) => {
 
 
@@ -13,56 +15,108 @@ const Hero = ({heroRef, heroVideoRef, heroTitleRef, heroSubtitleRef, heroButtons
         }}>Every dish tells a story</h3>
             </div>
 
-      <div ref={heroButtonsRef} className="z-30 absolute flex items-center justify-center gap-10 bottom-40 w-full h-12">
-        <button
-            className="
-                px-8 py-4
-                bg-accent
-                text-background
-                font-body
-                text-sm
-                min-w-[220px]
-                tracking-[0.2em]
-                uppercase
-                rounded-lg
-                transition-all
-                duration-300
-                hover:brightness-110
-                cursor-pointer
-            "
+      <div
+            ref={heroButtonsRef}
+            className="z-30 absolute flex items-center justify-center gap-4 bottom-40 w-full"
+        >
+            {/* VIEW MENU */}
+            <Link
+                to="/menu"
+                className="
+                    group
+                    inline-flex
+                    items-center
+                    gap-4
+                    border
+                    border-accent/60
+                    px-7
+                    py-4
+                    font-body
+                    text-xs
+                    tracking-[0.2em]
+                    uppercase
+                    text-accent
+                    transition-all
+                    duration-500
+                    hover:bg-accent
+                    hover:text-background
+                "
             >
-            Reserve a Table
-        </button>
-        <button
-            className="
-                px-8 py-4
-                border
-                min-w-[220px]
-                border-accent
-                text-accent
-                font-body
-                text-sm
-                tracking-[0.2em]
-                uppercase
-                rounded-lg
-                transition-all
-                duration-300
-                hover:bg-accent
-                hover:text-background
-                cursor-pointer
-            "
+                <span>
+                    View Menu
+                </span>
+
+                <span className="transition-transform duration-500 group-hover:translate-x-2">
+                    →
+                </span>
+            </Link>
+
+
+            {/* RESERVE TABLE */}
+            <a
+                href="#reservation"
+                className="
+                    group
+                    inline-flex
+                    items-center
+                    gap-4
+                    border
+                    border-accent/60
+                    px-7
+                    py-4
+                    font-body
+                    text-xs
+                    tracking-[0.2em]
+                    uppercase
+                    text-accent
+                    transition-all
+                    duration-500
+                    hover:bg-accent
+                    hover:text-background
+                "
             >
-            Explore Menu
-        </button>
-      </div>
-      <div className="font-body font-light absolute w-full h-20 bottom-0 flex items-center">
-        <div className="w-1/2 flex justify-start"> 
-            <p className="pl-16 text-sm text-text">Michelin Inspired</p>
+                <span>
+                    Reserve a Table
+                </span>
+
+                <span className="transition-transform duration-500 group-hover:translate-x-2">
+                    →
+                </span>
+            </a>
+
+
+            {/* TAKEAWAY */}
+            <Link
+                to="/takeaway"
+                className="
+                    group
+                    inline-flex
+                    items-center
+                    gap-4
+                    border
+                    border-accent/60
+                    px-7
+                    py-4
+                    font-body
+                    text-xs
+                    tracking-[0.2em]
+                    uppercase
+                    text-accent
+                    transition-all
+                    duration-500
+                    hover:bg-accent
+                    hover:text-background
+                "
+            >
+                <span>
+                    Takeaway
+                </span>
+
+                <span className="transition-transform duration-500 group-hover:translate-x-2">
+                    →
+                </span>
+            </Link>
         </div>
-        <div className="w-1/2 flex justify-end"> 
-            <p className="pr-16 text-sm text-text">Braga, Portugal</p>
-        </div>
-      </div>
 
       <div
         className="w-150 h-150 z-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 

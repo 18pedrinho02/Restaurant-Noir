@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import Takeaway from './components/Takeaway';
 import OrderSuccess from './components/OrderSuccess';
 import Admin from "./components/Admin";
+import Menu from './components/Menu';
 
 import { CartProvider } from './context/CartContext';
 
@@ -58,6 +59,9 @@ function App() {
 
     // Footer
     const footerRef = useRef(null);
+
+    // Signature Dishes
+    const signatureRef = useRef(null);
 
 
     // ==================================================
@@ -160,7 +164,6 @@ function App() {
     return (
         <>
 
-            <Navbar />
 
             <Hero
                 heroRef={heroRef}
@@ -172,7 +175,7 @@ function App() {
             />
 
             <SignatureDishes
-                signatureRef={useRef(null)}
+                signatureRef={signatureRef}
             />
 
             <OurStory
@@ -214,6 +217,7 @@ function Root() {
         <BrowserRouter>
 
             <CartProvider>
+                <Navbar/>
 
                 <Routes>
 
@@ -242,6 +246,11 @@ function Root() {
                         element={<Admin />}
                     />
                     
+                    <Route
+                        path="/menu"
+                        element={<Menu />}
+                    />
+
                 </Routes>
 
             </CartProvider>

@@ -1,11 +1,23 @@
 const navbarItems = [
-    "Home",
-    "Menu",
-    "About",
-    "Contact"
+    {
+        name: "Home",
+        target: "home"
+    },
+    {
+        name: "Menu",
+        target: "menu-preview"
+    },
+    {
+        name: "About",
+        target: "story"
+    },
+    {
+        name: "Contact",
+        target: "reservation"
+    }
 ];
 
-const FullscreenMenu = ({ isMenuOpen }) => {
+const FullscreenMenu = ({ isMenuOpen, onNavigate }) => {
 
     return (
         <div
@@ -31,9 +43,10 @@ const FullscreenMenu = ({ isMenuOpen }) => {
 
                     {navbarItems.map((item) => (
 
-                        <a
-                            key={item}
-                            href={`#${item.toLowerCase()}`}
+                        <button
+                            key={item.name}
+                            type="button"
+                            onClick={() => onNavigate(item.target)}
                             className="
                                 font-heading
                                 text-2xl
@@ -41,10 +54,11 @@ const FullscreenMenu = ({ isMenuOpen }) => {
                                 transition-colors
                                 duration-300
                                 hover:text-accent
+                                cursor-pointer
                             "
                         >
-                            {item.toUpperCase()}
-                        </a>
+                            {item.name.toUpperCase()}
+                        </button>
 
                     ))}
 

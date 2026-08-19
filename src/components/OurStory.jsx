@@ -89,6 +89,7 @@ const OurStory = ({ storyRef }) => {
     return (
         <section
             ref={storyRef}
+            id='about'
             className="w-full min-h-screen bg-background overflow-hidden relative px-16 py-32"
         >
 

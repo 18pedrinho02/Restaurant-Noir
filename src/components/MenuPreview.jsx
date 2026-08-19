@@ -267,8 +267,8 @@ const MenuPreview = ({ menuPreviewRef }) => {
                 {/* BUTTON */}
                 <div ref={previewButtonRef} className="flex justify-center gap-5 pt-8">
 
-                    <a
-                        href="#menu"
+                    <Link
+                        to="/menu"
                         className="group inline-flex items-center gap-4 border border-[#181818]/40 px-8 py-4 font-body text-xs tracking-[0.2em] uppercase transition-all duration-500 hover:bg-[#181818] hover:text-[#EDE9E1]"
                     >
                         <span>
@@ -278,7 +278,7 @@ const MenuPreview = ({ menuPreviewRef }) => {
                         <span className="transition-transform duration-500 group-hover:translate-x-2">
                             →
                         </span>
-                    </a>
+                    </Link>
                     
                     <Link
                         to="/takeaway"
