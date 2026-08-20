@@ -18,7 +18,6 @@ const Navbar = () => {
 
     const handleNavigation = (item) => {
 
-        // Fecha o menu
         setIsMenuOpen(false);
 
 
@@ -30,7 +29,7 @@ const Navbar = () => {
 
             navigate(item.path);
 
-            // Se for Home, garantir que fica no topo
+            // if it is home, go to top
             if (item.path === "/") {
 
                 setTimeout(() => {
@@ -52,7 +51,7 @@ const Navbar = () => {
 
         if (item.type === "section") {
 
-            // Se já estamos na homepage
+            // if we are in homepage
             if (window.location.pathname === "/") {
 
                 const element = document.getElementById(
@@ -70,8 +69,7 @@ const Navbar = () => {
             }
 
 
-            // Se estamos noutra página,
-            // primeiro voltamos para a homepage
+            
             navigate("/");
 
             setTimeout(() => {
