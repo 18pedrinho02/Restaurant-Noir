@@ -61,6 +61,7 @@ const Footer = ({ footerRef }) => {
     return (
         <footer
             ref={footerRef}
+            id='footer'
             className="w-full bg-background text-text overflow-hidden relative px-16 pt-32 pb-8"
         >
 
@@ -123,7 +124,7 @@ const Footer = ({ footerRef }) => {
 
                 {/* CONTACT */}
 
-                <div className="footer-item">
+                <div className="footer-item" id='bottom'>
 
                     <span className="font-body text-[10px] tracking-[0.25em] text-text-secondary uppercase">
                         Contact

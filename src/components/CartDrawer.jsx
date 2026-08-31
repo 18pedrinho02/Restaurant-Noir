@@ -110,7 +110,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
             <aside
                 ref={drawerRef}
-                className="fixed top-0 right-0 z-50 h-full w-full max-w-md bg-[#EDE9E1] text-[#181818] shadow-2xl"
+                className="fixed top-0 right-0 z-100 h-full w-full max-w-md bg-[#EDE9E1] text-[#181818] shadow-2xl"
             >
 
                 <div className="flex h-full flex-col">

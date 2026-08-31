@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Reservation = ({ reservationRef }) => {
@@ -321,12 +322,12 @@ const Reservation = ({ reservationRef }) => {
                         >
 
                             <a
-                                href="#reservation"
+                                href="#bottom"
                                 className="group w-full flex items-center justify-between border border-accent px-8 py-5 font-body text-xs tracking-[0.25em] uppercase transition-all duration-500 hover:bg-accent hover:text-background"
                             >
 
                                 <span>
-                                    Reserve a Table
+                                    To reserve contact us by email or phone number
                                 </span>
 
                                 <span className="text-lg transition-transform duration-500 group-hover:translate-x-2">
