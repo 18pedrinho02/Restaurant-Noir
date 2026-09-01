@@ -12,7 +12,8 @@ const MenuButton = ({ isMenuOpen, onClick }) => {
             className="
                 fixed
                 top-8
-                right-16
+                right-6
+                lg:right-16
                 z-[110]
                 text-text
                 hover:text-accent

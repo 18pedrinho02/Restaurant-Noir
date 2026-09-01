@@ -99,7 +99,7 @@ const Navbar = () => {
         <>
             {/* NAVBAR */}
 
-            <nav className="fixed top-0 left-0 w-full z-[100] px-16 py-8">
+            <nav className="fixed top-0 left-0 w-full z-[100] px-6 lg:px-16 py-8">
 
                 {/* LOGO */}
 

@@ -30,68 +30,166 @@ const Testimonials = ({ testimonialsRef }) => {
 
     useGSAP(() => {
 
-        // =========================
-        // HEADER ANIMATION
-        // =========================
+        const mm = gsap.matchMedia();
 
-        const titleTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: testimonialsRef.current,
-                start: 'top 55%',
-                toggleActions: 'play none none reverse'
-            }
-        });
+        // DESKTOP
 
-        titleTl
-            .from(testimonialsSubtitleRef.current, {
-                opacity: 0,
-                y: 15,
-                duration: 0.8,
-                ease: 'power3.out'
-            })
-            .from(
-                testimonialsTitleRef.current,
-                {
+        mm.add("(min-width: 1024px)", () => {
+
+            // HEADER IN
+
+            const titleTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: testimonialsRef.current,
+                    start: 'top 55%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+
+            titleTl
+                .from(testimonialsSubtitleRef.current, {
                     opacity: 0,
-                    y: 20,
-                    duration: 0.9,
+                    y: 15,
+                    duration: 0.8,
                     ease: 'power3.out'
-                },
-                '<0.2'
+                })
+                .from(
+                    testimonialsTitleRef.current,
+                    {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.9,
+                        ease: 'power3.out'
+                    },
+                    '<0.2'
+                );
+
+
+            // CARDS IN
+
+            const cards = testimonialCardsRef.current.querySelectorAll(
+                '.testimonial-card'
             );
 
+            gsap.set(cards, {
+                opacity: 0,
+                y: 40
+            });
 
-        // =========================
-        // CARDS INITIAL STATE
-        // =========================
+            gsap.to(cards, {
+                opacity: 1,
+                y: 0,
+                duration: 0.9,
+                stagger: 0.2,
+                ease: 'power3.out',
 
-        const cards = testimonialCardsRef.current.querySelectorAll(
-            '.testimonial-card'
-        );
+                scrollTrigger: {
+                    trigger: testimonialCardsRef.current,
+                    start: 'top 70%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
 
-        gsap.set(cards, {
-            opacity: 0,
-            y: 40
+
+            // CARDS OUT
+
+            const exitTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: testimonialCardsRef.current,
+                    start: 'bottom 55%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+
+            exitTl.to(cards, {
+                opacity: 0,
+                y: -40,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'power3.inOut'
+            });
+
         });
 
 
-        // =========================
-        // CARDS ANIMATION
-        // =========================
+        // MOBILE
 
-        gsap.to(cards, {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            stagger: 0.2,
-            ease: 'power3.out',
+        mm.add("(max-width: 1023px)", () => {
 
-            scrollTrigger: {
-                trigger: testimonialCardsRef.current,
-                start: 'top 70%',
-                toggleActions: 'play none none reverse'
-            }
+            // HEADER IN
+
+            const titleTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: testimonialsRef.current,
+                    start: 'top 75%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+
+            titleTl
+                .from(testimonialsSubtitleRef.current, {
+                    opacity: 0,
+                    y: 15,
+                    duration: 0.6,
+                    ease: 'power3.out'
+                })
+                .from(
+                    testimonialsTitleRef.current,
+                    {
+                        opacity: 0,
+                        y: 15,
+                        duration: 0.7,
+                        ease: 'power3.out'
+                    },
+                    '<0.2'
+                );
+
+
+            const cards = testimonialCardsRef.current.querySelectorAll(
+                '.testimonial-card'
+            );
+
+            gsap.set(cards, {
+                opacity: 0,
+                y: 25
+            });
+
+            gsap.to(cards, {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                stagger: 0.15,
+                ease: 'power3.out',
+
+                scrollTrigger: {
+                    trigger: testimonialCardsRef.current,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+
+
+
+            const exitTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: testimonialCardsRef.current,
+                    start: 'bottom 60%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+
+            exitTl.to(cards, {
+                opacity: 0,
+                y: -25,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power3.inOut'
+            });
+
         });
+
+
+        return () => mm.revert();
 
     }, { scope: testimonialsRef });
 
@@ -99,14 +197,12 @@ const Testimonials = ({ testimonialsRef }) => {
     return (
         <section
             ref={testimonialsRef}
-            className="w-full min-h-screen bg-background text-text overflow-hidden relative px-16 py-32"
+            className="w-full min-h-screen bg-background text-text overflow-hidden relative px-6 py-20 lg:px-16 lg:py-32"
         >
 
-            {/* =========================
-                HEADER
-            ========================= */}
+            {/* HEADER */}
 
-            <div className="w-full flex flex-col items-center text-center mb-28">
+           <div className="w-full flex flex-col items-center text-center mb-20 lg:mb-28">
 
                 <span
                     ref={testimonialsSubtitleRef}
@@ -117,7 +213,7 @@ const Testimonials = ({ testimonialsRef }) => {
 
                 <h1
                     ref={testimonialsTitleRef}
-                    className="font-heading text-6xl max-w-3xl mt-6 leading-tight"
+                    className="font-heading text-4xl lg:text-6xl max-w-3xl mt-6 leading-tight"
                 >
                     Words from
                     <span className="text-accent">
@@ -128,13 +224,11 @@ const Testimonials = ({ testimonialsRef }) => {
             </div>
 
 
-            {/* =========================
-                TESTIMONIALS
-            ========================= */}
+            {/* TESTIMONIALS */}
 
             <div
                 ref={testimonialCardsRef}
-                className="w-full max-w-6xl mx-auto grid grid-cols-3 gap-x-16"
+                className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-y-16 lg:gap-x-16"
             >
 
                 {testimonials.map((testimonial, index) => (
@@ -161,7 +255,7 @@ const Testimonials = ({ testimonialsRef }) => {
 
                         {/* QUOTE */}
 
-                        <div className="min-h-[180px]">
+                        <div className="min-h-0 lg:min-h-[180px]">
 
                             <span className="inline-block font-heading text-5xl text-accent leading-none transition-transform duration-500 ease-out group-hover:-translate-y-2">
                                 “

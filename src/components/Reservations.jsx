@@ -197,14 +197,14 @@ const Reservation = ({ reservationRef }) => {
         <section
         id='reservation'
             ref={reservationRef}
-            className="w-full min-h-screen bg-background text-text overflow-hidden relative px-16 py-32 flex items-center"
+            className="w-full min-h-screen bg-background text-text overflow-hidden relative px-6 py-20 lg:px-16 lg:py-32 flex items-center"
         >
 
             <div className="w-full max-w-6xl mx-auto">
 
                 {/* TOP */}
 
-                <div className="flex items-center justify-between mb-20">
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between mb-16 lg:mb-20">
 
                     <span
                         ref={reservationLabelRef}
@@ -225,7 +225,7 @@ const Reservation = ({ reservationRef }) => {
 
                 {/* MAIN CONTENT */}
 
-                <div className="grid grid-cols-2 gap-24 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
                     {/* LEFT */}
 
@@ -240,11 +240,12 @@ const Reservation = ({ reservationRef }) => {
 
                         <h1
                             ref={reservationTitleRef}
-                            className="font-heading text-7xl leading-[0.95] mt-8"
+                            className="font-heading text-5xl lg:text-7xl leading-[0.95] mt-6 lg:mt-8"
                         >
                             An evening
                             <br />
                             worth
+                            <br className="lg:hidden" />
                             <span className="text-accent">
                                 remembering.
                             </span>

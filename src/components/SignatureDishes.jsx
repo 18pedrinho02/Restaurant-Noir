@@ -61,11 +61,25 @@ const SignatureDishes =({signatureRef})=>{
 
     return(
         <section ref={signatureRef} className="w-full min-h-screen overflow-hidden bg-background relative">
-            <div id="introduction" className="mt-32 flex items-center flex-col">
-                <h1 id='signatureTitle' className="text-5xl font-heading text-text">SIGNATURE DISHES</h1>
-                <p id='signatureSubtitle' className="text-sm text-text-secondary font-body mt-4">A curated selection of our most celebrated creations</p>
+            <div
+                id="introduction"
+                className="mt-20 lg:mt-32 px-6 flex items-center flex-col text-center"
+            >
+                <h1
+                    id="signatureTitle"
+                    className="text-3xl lg:text-5xl font-heading text-text"
+                >
+                    SIGNATURE DISHES
+                </h1>
+
+                <p
+                    id="signatureSubtitle"
+                    className="text-xs lg:text-sm text-text-secondary font-body mt-4"
+                >
+                    A curated selection of our most celebrated creations
+                </p>
             </div>
-            <div ref={dishesContainer} className='mt-64 w-full flex flex-col space-y-0'>
+            <div ref={dishesContainer} className="mt-24 lg:mt-64 w-full flex flex-col space-y-0">
                 <DishCard
                     number="01"
                     name="Dry Aged Ribeye"
@@ -94,8 +108,7 @@ const SignatureDishes =({signatureRef})=>{
                 />
             </div>
 
-            <div ref={exploreFullMenuRef} className='w-full flex flex-col items-center gap-12 text-center mb-32'>
-                <hr className='w-[90%] text-text-secondary'></hr>
+            <div ref={exploreFullMenuRef} className="w-full flex flex-col items-center gap-8 lg:gap-12 text-center mb-20 lg:mb-32">                <hr className='w-[90%] text-text-secondary'></hr>
                 <Link ref={exploreFullMenuLinkRef} to="/menu" className='font-body group text-sm inline-flex items-center gap-2 text-text-secondary transition-all ease-in duration-300 uppercase hover:text-accent tracking-wide' >Explore full menu <FaArrowRight className='transition-all ease-in duration-300 group-hover:translate-x-3'></FaArrowRight> </Link>
             </div>
         </section>

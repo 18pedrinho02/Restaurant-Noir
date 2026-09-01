@@ -265,7 +265,7 @@ const MenuPreview = ({ menuPreviewRef }) => {
 
 
                 {/* BUTTON */}
-                <div ref={previewButtonRef} className="flex justify-center gap-5 pt-8">
+                <div ref={previewButtonRef} className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-5 pt-8">
 
                     <Link
                         to="/menu"

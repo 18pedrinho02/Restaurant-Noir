@@ -62,7 +62,7 @@ const Footer = ({ footerRef }) => {
         <footer
             ref={footerRef}
             id='footer'
-            className="w-full bg-background text-text overflow-hidden relative px-16 pt-32 pb-8"
+            className="w-full bg-background text-text overflow-hidden relative px-6 md:px-16 pt-24 md:pt-32 pb-8"
         >
 
             {/* =========================
@@ -71,14 +71,14 @@ const Footer = ({ footerRef }) => {
 
             <div
                 ref={footerLogoRef}
-                className="w-full flex flex-col items-center text-center mb-32"
+                className="w-full flex flex-col items-center text-center mb-20 md:mb-32"
             >
 
                 <span className="font-body text-xs tracking-[0.35em] text-text-secondary uppercase">
                     Braga, Portugal
                 </span>
 
-                <h2 className="font-heading text-[clamp(5rem,15vw,14rem)] leading-none text-accent mt-6">
+                <h2 className="font-heading text-[clamp(4.5rem,20vw,14rem)] leading-none text-accent mt-6">
                     NOIR
                 </h2>
 
@@ -96,7 +96,7 @@ const Footer = ({ footerRef }) => {
 
             <div
                 ref={footerContentRef}
-                className="w-full max-w-7xl mx-auto grid grid-cols-4 gap-16 border-t border-text-secondary/20 pt-12"
+                className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16 border-t border-text-secondary/20 pt-10 md:pt-12 text-center lg:text-left"
             >
 
                 {/* LOCATION */}
@@ -198,7 +198,7 @@ const Footer = ({ footerRef }) => {
                         Social
                     </h3>
 
-                    <div className="flex items-center gap-5 mt-5">
+                    <div className="flex items-center justify-center lg:justify-start gap-5 mt-5">
 
                         <a
                             href="#instagram"
@@ -227,11 +227,11 @@ const Footer = ({ footerRef }) => {
                 CTA
             ========================= */}
 
-            <div className="w-full flex justify-center py-24">
+            <div className="w-full flex justify-center py-16 md:py-24 px-4">
 
                 <a
                     href="#reservation"
-                    className="group inline-flex items-center gap-5 border border-accent px-10 py-5 font-body text-xs tracking-[0.25em] uppercase text-accent transition-all duration-500 hover:bg-accent hover:text-background"
+                    className="group inline-flex items-center justify-center gap-5 border border-accent px-8 md:px-10 py-5 font-body text-xs tracking-[0.25em] uppercase text-accent transition-all duration-500 hover:bg-accent hover:text-background text-center"
                 >
 
                     <span>
@@ -253,7 +253,7 @@ const Footer = ({ footerRef }) => {
 
             <div
                 ref={footerBottomRef}
-                className="w-full border-t border-text-secondary/20 pt-6 flex items-center justify-between"
+                className="w-full border-t border-text-secondary/20 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 text-center"
             >
 
                 <span className="font-body text-[10px] tracking-[0.15em] text-text-secondary uppercase">

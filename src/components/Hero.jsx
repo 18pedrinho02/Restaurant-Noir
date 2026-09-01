@@ -7,7 +7,7 @@ const Hero = ({heroRef, heroVideoRef, heroTitleRef, heroSubtitleRef, heroButtons
     <section ref={heroRef} id="home" className="relative min-h-screen w-full overflow-hidden bg-background">
 
     <div className="z-30 flex h-1/3 absolute text-center text-text flex-col top-[47%] left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <h1 ref={heroTitleRef} className="font-heading text-accent text-9xl" style={{
+        <h1 ref={heroTitleRef} className="font-heading text-accent text-8xl md:text-9xl" style={{
             textShadow: "0 4px 12px rgba(0, 0, 0, 0.8)",
         }}>NOIR</h1>
         <h3 ref={heroSubtitleRef} className="text-sm" style={{
@@ -17,7 +17,7 @@ const Hero = ({heroRef, heroVideoRef, heroTitleRef, heroSubtitleRef, heroButtons
 
       <div
             ref={heroButtonsRef}
-            className="z-30 absolute flex items-center justify-center gap-4 bottom-40 w-full"
+            className="z-30 absolute flex flex-col lg:flex-row items-center justify-center gap-4 bottom-20 lg:bottom-40 w-full"
         >
             {/* VIEW MENU */}
             <Link
@@ -119,7 +119,7 @@ const Hero = ({heroRef, heroVideoRef, heroTitleRef, heroSubtitleRef, heroButtons
         </div>
 
       <div
-        className="w-150 h-150 z-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+        className="w-80 h-80 lg:w-150 lg:h-150 z-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
         overflow-hidden [clip-path:polygon(50%_0%,61%_35%,98%_35%,68%_57%,79%_91%,50%_70%,21%_91%,32%_57%,2%_35%,39%_35%)]"
         ref={heroVideoRef}
         >
